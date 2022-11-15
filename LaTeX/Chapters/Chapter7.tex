@@ -1,0 +1,77 @@
+% Chapter Template
+
+\chapter{Software Development} % Main chapter title
+
+\label{ChapterX} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+
+\section{Docker}
+\begin{itemize}
+    \item Container: a way to package application with all the necessary dependencies and configuration. It's a portable artifact, easily shared and moved around.
+    \item Some considerations:
+        \begin{itemize}
+            \item A container lives on a container repository
+            \item Docker Hub: public repository for Docker
+            \item A container consists of layers of images. Mostly Linux Based Image, because small size
+            \item A container has a port which makes it possible to talk to the application
+            \item What are some simple and inexpensive ways to deploy the app on the cloud? I like Digital Ocean for simple things, probably AWS for real-world apps or you could use also Hetzner or Heroku.
+        \end{itemize}
+    
+    \item Docker Image: it is the actual package that is not running currently. But when you pull the image and start the application inside your machine, it becomes a Docker Container (running now). Basically, a Docker Container is a running environment for a Docker Image
+
+    \item A Dockerfile is a simple text file that contains the commands a user could call to assemble an image whereas Docker Compose is a tool for defining and running multi-container Docker applications.
+    Docker Compose define the services that make up your app in docker-compose.yml so they can be run together in an isolated environment. It gets an app running in one command by just running docker-compose up. Docker compose uses the Dockerfile if you add the build command to your project’s docker-compose.yml. Your Docker workflow should be to build a suitable Dockerfile for each image you wish to create, then use compose to assemble the images using the build command.
+
+    \end{itemize}
+
+\section{Git}
+
+\begin{itemize}
+    \item So, git fetch origin fetches any new work that has been pushed to that server since you cloned (or last fetched from) it. It’s important to note that the git fetch command only downloads
+    the data to your local repository — it doesn’t automatically merge it with any of your work or modify what you’re currently working on. You have to merge it manually into your work when you’re ready;
+    
+    \item HEAD: reference to the last commit in the currently checked-out branch;
+    
+    \item origin: shorthand name for the remote repository that a project was originally cloned from;
+\end{itemize}
+
+\section{Python}
+
+\begin{itemize}
+    \item É possível fazer uma instalação minuciosa do seguinte modo:
+    
+    \begin{enumerate}
+        \item The \_\_init\_\_.py make directories appear as libraries. That way you can import then and all the things inside them with simpler commands; 
+        
+        \item É possível utilizar \_\_all\_\_ dentro de \_\_init\_\_.py, para controlar quais files são importados quando o pacote é importado, e.g. \_\_all\_\_ = ["file1", "file2", "file3"]
+        
+        \item Classes allows us to logically group our data and functions in a way that's easy to reuse and also easy to build upon if need be
+        
+        \item Criar um arquivo requirements.txt, que especifica as bibliotecas e suas versões;
+        
+        \item Rodar, no diretório do arquivo requirements.txt, o seguinte comando: pip install -r requirements.txt -t .
+        
+        \item Python Coding Style Conventions (About Blank Lines)
+            \begin{itemize}
+                \item Leave 2 blank lines between class definitions and module-level functions
+                \item Leave 1 blank line between methods in a class
+                \item Use blank lines as needed in functions, methods, and modules to visually split up logical blocks of code
+            \end{itemize}
+        
+    \end{enumerate}
+    
+    \item Sobre ambientes virtuais:
+     \begin{itemize}
+         \item Basicamente, uma pasta isolado no seu computador que está isolada/blindada do resto do computador. Nela, as bibliotecas são instaladas com versões específicas
+     \end{itemize}
+\end{itemize}
+
+\section{AWS Configuration}
+\begin{itemize}
+    \item Instalar AWS CLI. Em seguida, no prompt de comando, digitar \textbf{aws configure}. O arquivo de configuração e o arquivo de credenciais serão criados.
+    \item Instalar AWS Toolkit (VS Code extension). Automaticamente, o perfil será conectado
+    
+\end{itemize}

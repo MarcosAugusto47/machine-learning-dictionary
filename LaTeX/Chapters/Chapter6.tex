@@ -1,0 +1,105 @@
+% Chapter Template
+
+\chapter{Data Engineering} % Main chapter title
+
+\label{ChapterX} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+
+\section{Principles of Relational Database Design}
+A relational database should satisfy the \textit{normal forms}. Data normalization simplifies the structure of complex databases that avoids redundancy and facilitates searching data. The 3 normal forms are:
+    
+    \begin{itemize}
+        \item \textbf{First Normal Form (1FN):} each field (column) accepts only one value, repetition of values is not allowed. If there is a necessity to repeat a value (for example, a client might have multiple telephone numbers), it is mandatory to create another table that can be related to the previous;
+        
+        \item \textbf{Second Normal Form (2FN):} the table should satisfy the 1FN and, furthermore, the fields that are not key should depend only to the key. For example, on client's registration, the field "last purchase date" does not only depend from the primary key (client identificator). This information should be obtained from another table (purchase history, for example);
+        
+        \item \textbf{Third Normal Form (3FN):} the table should satisfy the 2FN and, furthermore, the fields should not depend from other fields. For example, if the fields weight and height are present on the table, the field BMI (that is function of weight and height) should be removed.
+        
+\end{itemize}
+
+\section{API (Application Programming Interface)}
+
+\begin{itemize}
+    \item É um serviço web que provê uma interface para aplicações para manipular e extrair dados;
+    \item It is necessary to have an API key to be able to do requests to get data;
+    \item ENDPOINT: point of entry in a communication channel when two systems are interacting. It refers to touchpoints of the communication between an API and a server;
+    \item Em suma, CRUD é um conjunto de operações primitivas (principalmente para bancos de dados e armazenamento de dados estáticos), enquanto o REST é um estilo de API de nível muito alto (principalmente para serviços da Web e outros sistemas "ativos");
+    \item Some methods:
+    \begin{enumerate}
+        \item GET: comando que simplesmente puxa os dados presentes em um endpoint;
+        \item POST: comando que possibilita uma seleção mais minuciosa dos dados. Por exemplo, filtrar os dados em uma determinada janela de tempo ou que envia dados (enviar novo login de usuário);
+        \item PUT: update something, modifying information;
+        \item DELETE:...
+    \end{enumerate}
+\end{itemize}
+
+\section{Amazon Web Services}
+\subsection{AWS S3}
+Serviço de armazenamento de dados. Há funcionalidade de versionamento também;
+
+
+\subsection{AWS Lambda}
+    \begin{itemize}
+        \item Service to run serverless code (Python, Node.js, C\#, Go, etc);
+        \item Amazon Lambda enables functions that can run up to 15 minutes;
+        \item Each AWS Lambda execution environment provides 512 MB of disk space in the /tmp directory which can be used for some data processing and can be used for temporary storage. This /tmp disk space is preserved for the lifetime of the execution environment and provides a transient cache for data between invocations;
+        \item Para utilizar bibliotecas, e.g requests, BeautifulSoup, no AWS Lambda, é necessário adicionar uma Layer com essa biblioteca antes. Essa Layer pode ser criada de algumas maneiras. O jeito mais fácil e é o que eu faço é o seguinte:
+        
+        \begin{enumerate}
+            \item Instalar a biblioteca com pip install <nome da biblioteca> dentro de uma pasta chamada python/ na máquina local;
+            \item Transformar a pasta que contem a subpasta python/ para .zip;
+            \item Fazer o upload do arquivo .zip diretamente no serviço da AWS Lambda. Ficar atento na hora de escolher a versão de runtime do python asssociada a layer;
+        \end{enumerate}
+        
+    \end{itemize}
+
+\subsection{AWS Step Functions}
+AWS Step Functions is a serverless function orchestrator that makes it easy to sequence AWS Lambda functions and multiple AWS services into business-critical applications. Through its visual interface, you can create and run a series of checkpointed and event-driven workflows that maintain the application state;
+
+
+\subsection{AWS Glue}
+    \begin{itemize}
+        
+        \item Sobre a ferramenta \textbf{Crawler}: Um crawler se conecta a um datastore, passa por uma lista prioritária de classificadores para determinar o esquema dos seus dados e, em seguida, cria tabelas de metadados em seu catálogo de dados (AwsDataCatalog);
+        
+        \item Após atualização dos dados em uma pasta que não afete a estrutura (adição de colunas, renomeação de colunas, mudança do tipo da coluna), não é necessário rodar o crawler. A tabela já estará atualizada automaticamente no AWS Athena;
+        
+        \item Após adição de partição no S3, é necessário rodar o AWS Glue Crawler novamente para aparecer os dados no AWS Athena
+    
+    \end{itemize}    
+
+\subsection{AWS Athena}
+\begin{itemize}
+    \item Serviço para fazer queries, criar views em linguagem SQL;
+    \item Pode ser integrado com o AWS Quicksight (serviço de visualização de dados);
+\end{itemize}
+
+\subsection{AWS CloudWatch}
+\begin{itemize}
+    \item É possível criar um alarme para erro de rodagem de alguma função AWS Lambda.
+    \begin{itemize}
+        \item Criar novo alarme;
+        \item Selecionar a métrica de "Errors" vinculada a função AWS Lambda desejada (Metrics $>$ AWS namespaces $>$ Lambda $>$ Por nome da função $>$ Função desejada);
+        \item Selecionar/Criar notificação no AWS SNS, enviar e-mail/SMS, avisando que houve erro na rodagem.
+    \end{itemize}
+\end{itemize}
+
+\subsection{AWS Quicksight}
+
+    \begin{itemize}
+        \item Para views criadas no AWS Athena e adicionadas em Datasets, a atualização é imediata, mesmo sem utilizar SPICE;
+        
+        \item Após atualização dos dados em uma pasta que não afete a estrutura (adição de colunas, renomeação de colunas, mudança do tipo da coluna), não é necessário rodar o crawler. O dataset já estará atualizado automaticamente.
+    \end{itemize}
+
+\subsection{AWS Simple Email Service}
+Amazon Simple Email Service (SES) is a cloud-based email service that provides cost-effective, flexible and scalable way for businesses of all sizes to keep in contact with their customers through email.
+
+\subsection{AWS DynamoDB}
+\begin{itemize}
+    \item Serviço de banco de dados NoSQL;
+    \item Percebi que a ordem das linhas e das colunas não é constante. Então, é recomendável, criar uma partition\_key;
+\end{itemize}

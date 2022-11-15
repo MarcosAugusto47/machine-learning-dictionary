@@ -1,0 +1,67 @@
+% Chapter Template
+
+\chapter{Unsupervised Learning} % Main chapter title
+
+\label{Chapter2} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+
+\section{Partitioning Methods}
+
+Suitable for finding spherical-shaped clusters or convex clusters. In other words, they work well for compact and well separated clusters. Moreover, they are also severely affected by the presence of noise and outliers in the data. Unfortunately, real life data can contain: i) clusters of arbitrary shape (oval, linear and “S” shape clusters); ii) many outliers and noise.
+\subsection{K-means}
+There are various methods to find the optimal/best value of k. In this article we will cover two:
+
+\begin{itemize}
+\item Elbow Method
+
+\item Silhouette Method: The silhouette Method is also a method to find the optimal number of clusters and interpretation and validation of consistency within clusters of data. The silhouette method computes silhouette coefficients of each point that measure how much a point is similar to its own cluster compared to other clusters by providing a succinct graphical representation of how well each object has been classified. Compute silhouette coefficients for each of point, and average it out for all the samples to get the silhouette score
+
+The value of the silhouette ranges between [1, -1], where a high value indicates that the object is well matched to its own cluster and poorly matched to neighboring clusters.
+    
+\end{itemize}
+
+Importante pensar cuidadosamente se é necessário padronizar as variáveis (deixá-las com desvio-padrão igual 1).
+    
+\subsection{PAM clustering}
+\subsection{Clusterização Hierárquica}
+
+É importante pensar cuidadosamente se é necessário padronizar as variáveis (deixá-las com desvio-padrão igual 1). alguns métodos de aglomeração:
+\begin{itemize}
+
+\item \textit{Single-Linkage}: mínima dissimilaridade intercluster. Consiste em em computar todas as \textit{pairwise} dissimilaridades entre as observações do cluster A e as observações do cluster B e registrar a menor dessas dissimilaridades.
+
+\item \textit{Complete-Linkage}: máxima dissimilaridade intercluster. Consiste em em computar todas as \textit{pairwise} dissimilaridades entre as observações do cluster A e as observações do cluster B e registrar a maior dessas dissimilaridades. Tende a gerar cluster's mais balanceados.
+
+\item \textit{Average-Linkage}: média dissimilaridade intercluster. Consiste em em computar todas as \textit{pairwise} dissimilaridades entre as observações do cluster A e as observações do cluster B e registrar a média dessas dissimilaridades.
+Tende a gerar cluster's mais balanceados.
+
+\item \textit{Centroid-Linkage}: dissimilaridade entre centróide do cluster A e centróide do cluster B. Pode resultar em indesejáveis inversões.
+
+\end{itemize}
+
+\section{Density methods}
+\subsection{DBScan (Density-Based Spatial Clustering and Application with Noise)} Non-linear algorithm and it is insensitive to order. Unlike to K-means, DBSCAN does not require the user to specify the number of clusters to be generated, DBSCAN can find any shape of clusters. The cluster doesn’t have to be circular. DBSCAN can identify outliers.
+
+%----------------------------------------------------------------------------------------
+%	SECTION 2
+%----------------------------------------------------------------------------------------
+
+\section{Considerações}
+\begin{itemize}
+\item Should the observations or features first be standardized in some way? For instance, maybe the variables should be centered to have mean zero and scaled to have standard deviation one.
+
+\item In the case of hierarchical clustering,
+
+\begin{enumerate}
+    \item What dissimilarity measure should be used? Euclidiana, alguma distância baseada em correlação?
+    
+    \item What type of linkage should be used?
+    
+    \item Where should we cut the dendrogram in order to obtain clusters?
+\end{enumerate}
+
+\item In the case of K-means clustering, how many clusters should we look for in the data?
+\end{itemize}
