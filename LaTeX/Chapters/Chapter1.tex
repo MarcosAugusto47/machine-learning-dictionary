@@ -202,11 +202,23 @@ The back-propagation algorithm,  often simply called backprop, allows the inform
 the network, in order to compute the gradient.
 
 
-
 The term back-propagation is often misunderstood as meaning the whole
 learning algorithm for multi-layer neural networks. Actually, back-propagation refers only to the method for computing the gradient
 
 Activating functions: the softmax function is used as the activation function in the output layer of neural network models that predict a multinomial probability distribution. That is, softmax is used as the activation function for multi-class classification problems where class membership is required on more than two class labels.
+
+\section{Time Series Models}
+Para verificar o poder preditivo do modelo é interessante comparar as métricas de performance do modelo proposto com as de um \textit{naive forecast model} (benchmarking)
+
+\subsection{ARMA}
+Modelos ARMA só podem ser aplicados para séries estacionárias. No
+entanto, a maior parte das séries não são estacionárias.
+\subsection{ARIMA}
+Um modelo ARMA Integrado, ARIMA(p,d,q), consiste em aplicar o
+modelo ARMA(p,q) na d-ésima diferença da série. Aplicar d-diferenças torna a série estacionária. Geralmente d = 1 ou d = 2 é suficiente para séries não sazonais (ou com sazonalidade ajustada)
+\subsection{SARIMA}
+\subsection{ARIMAX}
+\subsection{SARIMAX}
 
 \section{Conceitos importantes}
 
@@ -300,12 +312,34 @@ When the number of variables $p$ is almost as large as the number of observtions
 \end{enumerate}
 
 \subsubsection{Classificação}
-\begin{enumerate}
-    \item \textit{Accuracy}: (TN + TP) / (TN + FP + FN + TP)
-    \item \textit{Precision}: TP / (TP + FP) 
-    \item \textit{Recall, Sensitivity, True Positive Rate}: TP / (TP + FN)
-    \item $f_1\-score = 2\frac{precision * recall}{precision + recall}$
-    \item Curva ROC: gráfico entre \textit{True Positive Rate} e \textit{False Positive Rate} (FP / (FP + TN)). It summarizes all of the confusion matrices that each threshold produced
-\end{enumerate}
+
+\begin{table}[H]
+\centering
+\caption{Matriz de Confusão}
+\begin{tabular}{@{}cc cc@{}}
+\multicolumn{1}{c}{} &\multicolumn{1}{c}{} &\multicolumn{2}{c}{\textbf{Predição}} \\ 
+\cmidrule(lr){3-4}
+\multicolumn{1}{c}{} & 
+\multicolumn{1}{c}{} & 
+\multicolumn{1}{c}{False (-)} & 
+\multicolumn{1}{c}{True (+)} \\ 
+\cline{2-4}
+\multirow[c]{2}{*}{\rotatebox[origin=tr]{0}{\textbf{Classe}}}
+& False (-) & TN (True Negative) & FP (False Positive) \\[1.5ex]
+& True (+) & FN (False Negative)   & TP (True Positive) \\
+\cline{2-4}
+\end{tabular}
+\label{confusion-matrix}
+\end{table}
+
+\begin{align*}
+\text{Accuracy} &= \frac{TN + TP}{TN + FP + FN + TP}\\
+\text{Precision} &= \frac{TP}{TP + FP}\\
+\text{Recall, Sensitivity, True Positive Rate} &= \frac{TP}{TP + FN}\\
+\text{F1 Score} &= 2\frac{precision * recall}{precision + recall}\\
+\end{align*}
+
+É interessante fazer a Curva ROC, gráfico entre \textit{True Positive Rate} e \textit{False Positive Rate} (FP / (FP + TN)). It summarizes all of the confusion matrices that each threshold produced.
+
 A utilização da acurácia não é recomendado no caso de um conjunto de dados desbalanceados.
 

@@ -142,6 +142,10 @@ Missing data can be MAR, MCAR, and MNAR.
     \item Stochastic regression imputation: similar to regression imputation which tries to predict the missing values by regressing it from other related variables in the same dataset plus some random residual value
 \end{itemize}
 
+\section{Splines}
+Técnica que permite ajustar um polinômio para uma covariável, o que possibilitar modelar comportamentos não lineares. Exemplo do dataset do Titanic, para predição de morte do passageiro. Em um modelo de regressão logísticac, ao utilizar a covariável de Age, é assumido que ela possui um efeito linear no log de odds. Contudo, isso não é razoável de assumir, pois as caudas (bebês e idosos) devem possuir prioridade para serem salvos, em relação a pessoas adultas. Logo, utilizar apenas um parâmetro para capturar esse efeito não faz muito sentido. Splines irá permitir, por exemplo, ajustar um polinômio de ordem 4, em que cada um dos parâmetros está associado a um intervalo de Age. 
+
+
 \section{Como lidar com evento raro?}
 \begin{itemize}
     \item \textbf{Oversampling}: simple to implement and fast to execute, which is desirable for very large and complex datasets
